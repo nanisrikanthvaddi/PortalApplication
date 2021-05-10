@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    url : "jdbc:h2:file:~/portalDBS;DB_CLOSE_ON_EXIT=FALSE;IFEXISTS=FALSE;DB_CLOSE_DELAY=-1"
+    driverClassName: "org.h2.Driver"
+    username : sa
+    password :
+    database-platform=org : database-platform=org
+    initialization-mode : embedded
+  jpa:
+    hibernate :
+      naming-strategy : org.hibernate.cfg.DefaultComponentSafeNamingStrategy
+      ddl-auto : validate
+  h2:
+    console:
+      enabled : true
+      path: "/h2"
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: default
+
+
+  thymeleaf:
+    template-loader-path: "classpath:/templates/"
+    suffix: .html
+    cache: false
+    enabled: true
+    check-template-location : true
+    check-template : true
+
+app : srikanth

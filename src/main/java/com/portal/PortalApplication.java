@@ -1,14 +1,20 @@
 package com.portal;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-//http://www.thymeleaf.org/doc/articles/layouts.html
 @SpringBootApplication
 public class PortalApplication {
 
-	public static void main(String[] args) throws Exception {
-		SpringApplication.run(PortalApplication.class, args);
-	}
+    @Autowired
+    @Value("${name}")
+    public static String myName;
 
+    public static void main(String[] args) {
+        SpringApplication.run(PortalApplication.class, args);
+        System.out.println("my name "+myName);
+
+    }
 }
