@@ -135,3 +135,7 @@ a[data-toggle="collapse"] {
     padding: 10px;
     background-color: #8d9199;
 }
+
+.menuWidth{
+    max-width:21% !important;
+}

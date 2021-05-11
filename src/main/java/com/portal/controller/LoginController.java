@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.sql.Timestamp;
 
 @Controller
 public class LoginController {
@@ -71,9 +72,15 @@ public class LoginController {
 
     @GetMapping(value="/admin/home")
     public ModelAndView home(@RequestParam(value = "module", required = false) String action){
+
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
+        if(action ==null){
+            user.setLastLoginTime(new Timestamp(System.currentTimeMillis()));
+            userService.updateUser(user);
+        }
+
       /*  modelAndView.addObject("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
         modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");*/
         if(action!=null && action.equals("users") ){
