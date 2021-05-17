@@ -10,7 +10,8 @@ insert into users  (user_id ,user_name ,email  ,password  ,name   ,address  ,act
 
 
 
-insert into roles(role_id,role) values(1,'ADMIN');
+insert into roles values( (select role_sequence.nextval  AS id from dual) , 'ADMIN', 'ADMIN');
+
 insert into user_role (role_id,user_id) values(1,1);
 insert into user_role (role_id,user_id) values(1,2);
 insert into user_role (role_id,user_id) values(1,3);

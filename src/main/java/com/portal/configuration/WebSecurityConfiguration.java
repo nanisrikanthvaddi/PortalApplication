@@ -36,7 +36,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         String loginPage = "/login";
         String logoutPage = "/logout";
 
-        http.
+        http.cors().disable().
                 authorizeRequests()
                 .antMatchers("/").permitAll()
             /*    .antMatchers("/css/**").permitAll()
@@ -67,7 +67,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .antMatchers("/h2/**","/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
+                .antMatchers("/h2/**","/resources/**", "/static/**", "/static/images/**","/css/**", "/js/**", "/images/**");
     }
+
 
 }

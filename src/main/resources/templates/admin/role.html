@@ -1,0 +1,111 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<div th:insert="admin/header"></div>
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="addRole" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Adding Role</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" novalidate>
+                        <form th:action="@{/admin/role/add}" th:object="${rolesDefault}" method="POST">
+                                <div class="form-group">
+                                    <label>Role Name </label>
+                                    <input type="text" th:field="*{roleName}" class="form-control" id="role" aria-describedby="RoleHelp" required="required"
+                                           placeholder="Enter Role Name">
+                                </div>
+                            <div class="form-group">
+                                <label>Role Permission</label>
+                                <input type="text" class="form-control"  th:field="*{permission}"  id="permission" aria-describedby="RoleHelp" required="required"
+                                       placeholder="Enter Role Permission ">
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                               <!-- <button type="submit" class="btn btn-primary">Submit</button>-->
+                        </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="row">
+    <div class="col-md-3 menuWidth">
+
+
+        <div th:insert="admin/navigation"></div>
+
+
+    </div>
+
+
+
+
+
+    <div class="col-md-9">
+        <div class="maindiv">
+
+            <div class="card">
+                <!--  <img class="card-img-top" src="..." alt="Card image cap">-->
+                <div class="card-body">
+                    <h5 class="card-title userlist">Role Managment </h5>
+                    <p class="card-text"></p>
+                    <div class="row">
+                        <div class="col-md-12 text-right">
+                        <button type="button" class="btn btn-success badge-pill" style="width: 80px "  data-toggle="modal" data-target="#addRole" >Add</button>
+                        </div>
+                    </div>
+                    <div th:if="${filter == 'roleList' }" >
+
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <!-- <th scope="col">#</th>-->
+                                <th scope="col">ID</th>
+                                <th scope="col">Role Name</th>
+                                <th scope="col">Persmission</th>
+                                <!--<th scope="col">Contact NO</th>-->
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="role, iterStat : ${roleList}">
+                                <td th:text="${iterStat.count}"/>
+                                <td th:text="${role.roleName}"/>
+                                <td th:text="${role.permission}"/>
+                               <!-- <td th:text="${facility.contactNumber}"/>-->
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- users list  end-->
+        </div>
+    </div>
+
+
+</div>
+
+</html>
+
