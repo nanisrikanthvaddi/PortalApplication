@@ -72,7 +72,7 @@
                                 <th scope="col">Address</th>
                                 <th scope="col">Last Login Time</th>
                                 <th scope="col">Status</th>
-                                <th scope="col">Action</th>
+                                <th scope="col" style="text-align:center">ACTION</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -86,7 +86,9 @@
                                 <td th:text="${user.lastLoginTime}"/>
 
                                 <td th:text="${user.active ? 'ACTIVE' : 'INACTIVE'}"/>
-                                <td><a href="#">EDIT</a> / <a href="#">DELETE</a></td>
+                                <td style="text-align: center !important;"><a href="#"><i class="fas fa-edit"></i> </a>
+                                    &nbsp;<a href="#"><i style="color:red" class="fas fa-trash"></i></a></td>
+                               <!-- <td><a href="#">EDIT</a> / <a href="#">DELETE</a></td>-->
 
 
                                 <!-- <td>Yes</td>-->

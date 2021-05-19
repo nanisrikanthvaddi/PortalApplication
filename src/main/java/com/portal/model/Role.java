@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Builder
@@ -23,6 +25,9 @@ public class Role {
     @Column(name = "role_name")
     private String roleName;
 
-    @Column(name = "permission")
-    private String permission;
+
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(name = "roles_permission", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "permission_id"))
+    private List<Permissions> permissions = new ArrayList<>();
+
 }

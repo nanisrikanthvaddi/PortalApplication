@@ -1,0 +1,101 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<div th:insert="admin/header"></div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="addRole" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Adding Role</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" novalidate>
+                <form th:action="@{/admin/permissions/add}" th:object="${permissionDefault}" method="POST">
+                    <div class="form-group">
+                        <label>Enter Permission </label>
+                        <input type="text"  th:field="*{permission}"    id="permission" class="form-control"
+                               aria-describedby="permissionHelp" required="required"
+                               placeholder="Enter Permission Name">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                    <!-- <button type="submit" class="btn btn-primary">Submit</button>-->
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-3 menuWidth">
+
+
+        <div th:insert="admin/navigation"></div>
+
+
+    </div>
+
+
+    <div class="col-md-9">
+        <div class="maindiv">
+
+            <div class="card">
+                <!--  <img class="card-img-top" src="..." alt="Card image cap">-->
+                <div class="card-body">
+                    <h5 class="card-title userlist">Permission Managment </h5>
+                    <p class="card-text"></p>
+                    <div class="row">
+                        <div class="col-md-12 text-right">
+                            <button type="button" class="btn btn-success badge-pill" style="width: 80px "
+                                    data-toggle="modal" data-target="#addRole">Add
+                            </button>
+                        </div>
+                    </div>
+                    <div th:if="${filter == 'permissionsList' }">
+
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <!-- <th scope="col">#</th>-->
+                                <th scope="col">ID</th>
+                                <th scope="col">Permission</th>
+
+                                <th scope="col" style="text-align:center">ACTION</th>
+                                <!--<th scope="col">Contact NO</th>-->
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="permissionLoop, iterStat : ${permissionsList}">
+                                <td th:text="${iterStat.count}"/>
+                                <td th:text="${permissionLoop.permission}"/>
+                                <td style="text-align: center !important;"><a href="#"><i class="fas fa-edit"></i> </a>
+                                    &nbsp;&nbsp; <a href="#"><i style="color:red" class="fas fa-trash"></i></a></td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- users list  end-->
+        </div>
+    </div>
+
+
+</div>
+
+</html>

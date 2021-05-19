@@ -12,7 +12,23 @@ create table IF NOT EXISTS   users   (
     Last_Login_time timestamp
     );
 
-create table IF NOT EXISTS roles( role_id  long auto_increment not null,  role_name varchar(30) not null , permission varchar(30));
+
+CREATE SEQUENCE  IF NOT EXISTS  permission_sequence START WITH 1   INCREMENT BY 1;
+
+create table IF NOT EXISTS permissions( permission_id long auto_increment not null,  permissions varchar(30) not null );
+
+
+create table IF NOT EXISTS roles(
+    role_id  long auto_increment not null,
+    role_name varchar(30) not null
+    );
+
+create table IF NOT EXISTS roles_permission(
+                                    role_id  long auto_increment not null,
+                                    permission_id long not null ,
+    foreign key (role_id) references roles(role_id),
+    foreign key (permission_id) references permissions(permission_id)
+    );
 
 create table IF NOT EXISTS   user_role   (
      user_id long auto_increment,

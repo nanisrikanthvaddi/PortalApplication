@@ -25,11 +25,24 @@
                                     <input type="text" th:field="*{roleName}" class="form-control" id="role" aria-describedby="RoleHelp" required="required"
                                            placeholder="Enter Role Name">
                                 </div>
+
+                                <div class="form-group">
+
+                                    <label>Role Permission</label>
+                                    <div  th:each="permissions,stat  : ${permissionList}" >
+                                        <div class="form-check form-check-inline"   >
+                                            <input class="form-check-input " type="checkbox" th:field="*{permissions[__${stat.index}__]}"  th:value="${permissions.id}">
+                                            <label th:text="${permissions.permission}"></label>
+
+                                        </div>
+                                    </div>
+                                </div>
+    <!--
                             <div class="form-group">
                                 <label>Role Permission</label>
-                                <input type="text" class="form-control"  th:field="*{permission}"  id="permission" aria-describedby="RoleHelp" required="required"
+                                <input type="text" class="form-control"  th:field="*{permissions}"  id="permissions" aria-describedby="RoleHelp" required="required"
                                        placeholder="Enter Role Permission ">
-                            </div>
+                            </div>-->
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -80,16 +93,24 @@
                                 <!-- <th scope="col">#</th>-->
                                 <th scope="col">ID</th>
                                 <th scope="col">Role Name</th>
-                                <th scope="col">Persmission</th>
+                                <th scope="col">Persmissions</th>
+                                <th scope="col" style="text-align:center">ACTION</th>
                                 <!--<th scope="col">Contact NO</th>-->
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="role, iterStat : ${roleList}">
+                            <tr th:each="roleLoop, iterStat : ${roleList}">
                                 <td th:text="${iterStat.count}"/>
-                                <td th:text="${role.roleName}"/>
-                                <td th:text="${role.permission}"/>
-                               <!-- <td th:text="${facility.contactNumber}"/>-->
+                                <td th:text="${roleLoop.roleName}"/>
+                                    <td >
+                                        <div th:each="permissionLoop:  ${roleLoop.permissions}">
+                                            <ul style="paddding: 0 !important;padding-top: 0px; margin-bottom: 0 !important" >
+                                                <li>  <b> <span> <i class="far fa-list"  th:text="${permissionLoop.permission}"></i> </span></b></li>
+                                            </ul>
+                                        </div>
+
+                                    </td>
+                                <td style="text-align: center !important;"><a href="#"><i class="fas fa-edit"></i> </a> &nbsp;&nbsp; <a href="#"><i  style="color:red" class="fas fa-trash"></i></a> </td>
                             </tr>
 
                             </tbody>
