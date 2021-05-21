@@ -1,5 +1,6 @@
 package com.portal.service;
 
+import com.portal.model.Permissions;
 import com.portal.model.Role;
 import com.portal.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ public class MyUserDetailsService implements UserDetailsService {
     @Autowired
     private UserService userService;
 
+
+
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String userName) {
@@ -29,11 +32,18 @@ public class MyUserDetailsService implements UserDetailsService {
         return buildUserForAuthentication(user, authorities);
     }
 
-    private List<GrantedAuthority> getUserAuthority(Set<Role> userRoles) {
+    private List<GrantedAuthority> getUserAuthority(Role userRoles) {
         Set<GrantedAuthority> roles = new HashSet<>();
-        for (Role role : userRoles) {
+        /*for (Role role : userRoles) {
             roles.add(new SimpleGrantedAuthority(role.getRoleName()));
+        }*/
+
+        for(com.portal.model.Permissions permissions:userRoles.getPermissions()){
+            roles.add(new SimpleGrantedAuthority(permissions.getPermission()));
         }
+
+       // roles.add(new SimpleGrantedAuthority(userRoles.getRoleName()));
+
         return new ArrayList<>(roles);
     }
 

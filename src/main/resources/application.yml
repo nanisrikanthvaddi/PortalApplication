@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url : "jdbc:h2:file:~/portalDB7;DB_CLOSE_ON_EXIT=FALSE;IFEXISTS=FALSE;DB_CLOSE_DELAY=-1"
+    url : "jdbc:h2:file:~/portalDB8;DB_CLOSE_ON_EXIT=FALSE;IFEXISTS=FALSE;DB_CLOSE_DELAY=-1"
     driverClassName: "org.h2.Driver"
     username : sa
     password :
@@ -10,6 +10,7 @@ spring:
     hibernate :
       naming-strategy : org.hibernate.cfg.DefaultComponentSafeNamingStrategy
       ddl-auto : validate
+    show-sql: true
   h2:
     console:
       enabled : true
@@ -28,4 +29,4 @@ spring:
     check-template-location : true
     check-template : true
 
-app : srikanth
+app : sr

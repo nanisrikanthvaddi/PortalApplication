@@ -1,3 +1,7 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <div class="wrapper">
     <!-- Sidebar -->
@@ -8,34 +12,45 @@
 
         <ul class="list-unstyled components">
             <!-- <p>Dummy Heading</p>-->
-            <li class="active">
+            <li class="active"  sec:authorize="hasAuthority('Administration')" >
                 <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
                 <ul class="collapse list-unstyled" id="homeSubmenu">
                     <li>
-                        <a href="/admin/home?module=users">Users</a>
+                        <a href="/admin/users">User Management</a>
                     </li>
                     <li>
                         <a href="/admin/role">Roles</a>
                     </li>
                     <li>
-                        <a href="/admin/permissions">Permissions Managment</a>
+                        <a href="/admin/facility">Facility Management</a>
                     </li>
                     <li>
-                        <a href="/admin/facility">Facilities Managment</a>
+                        <a href="/admin/permissions">Permissions</a>
                     </li>
+
 
                 </ul>
             </li>
-            <li>
+            <li sec:authorize="hasAnyAuthority('Administration','File Upload')">
                 <a href="#">File Upload</a>
             </li>
 
-            <li>
+            <li  sec:authorize="hasAnyAuthority('Administration','Case Management')">
                 <a href="#">Case Managment</a>
             </li>
-            <li>
-                <a href="#">Reports</a>
+            <li  sec:authorize="hasAnyAuthority('Administration','Data Hub')">
+                <a href="#">Data Hub</a>
             </li>
+            <li sec:authorize="hasAnyAuthority('Administration','ROLE_Reports')">
+
+                <a href="#">Reports</a>
+
+            </li>
+            <li>
+                     <a href="/logout">Logout</a>
+
+            </li>
+
         </ul>
 
     </nav>

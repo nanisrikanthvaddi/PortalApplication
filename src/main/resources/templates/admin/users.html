@@ -1,0 +1,209 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<div th:insert="admin/header"></div>
+
+
+<div class="row">
+    <div class="col-md-3 menuWidth">
+
+
+        <div th:insert="admin/navigation"></div>
+
+
+    </div>
+
+
+    <!-- add user ends  --->
+
+    <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" novalidate>
+
+
+                    <form th:action="@{/admin/users/add}" th:object="${userDefault}" method="POST" class="needs-validation"
+                          novalidate>
+                        <div class="form-row" style=" width: 120%!important;">
+                            <div class="col-md-6 ">
+                                <label for="validationTooltip01">First name</label>
+                                <input type="text"  th:field="*{firstName}"  class="form-control" id="validationTooltip01"
+                                       placeholder="First name" value="Mark" required>
+                                <div class="valid-tooltip">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="validationTooltip02">Last name</label>
+                                <input type="text" th:field="*{lastName}"  class="form-control" id="validationTooltip02" placeholder="Last name"
+                                       value="Otto" required>
+                                <div class="valid-tooltip">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="validationTooltipUsername">User Id</label>
+
+                                    <input type="text" class="form-control"  th:field="*{userName}"   id="validationTooltipUsername"
+                                           placeholder="User Id" aria-describedby="validationTooltipUsernamePrepend"
+                                           required>
+                                    <div class="invalid-tooltip">
+                                        Please choose a unique and valid username.
+                                    </div>
+                                </div>
+
+
+                            <div class="col-md-6">
+                                <label for="emailId">emailId</label>
+                                <input type="text" th:field="*{email}" class="form-control" id="emailId" placeholder="emailId"
+                                       required>
+                                <div class="invalid-tooltip">
+                                    Please provide a valid city.
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="form-row"  style=" width: 120%!important;">
+
+                            <div class="col-md-6">
+                                <label for="address">Address</label>
+                                <input type="text" class="form-control"  th:field="*{address}" id="address"  placeholder="Address"
+                                       required>
+                                <div class="invalid-tooltip">
+                                    Please provide a valid state.
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="Gender">Gender</label>
+                                <select th:field="*{gender}"  class="form-control" aria-label="Default select example"
+                                        id="Gender" aria-describedby="GenderTip" required="required">
+                                    <!--  <option selected>Open this select menu</option>-->
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Role and Facility  -->
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="Roles">Roles</label>
+                                <select th:field="*{roles.id}"  class="form-control"
+                                        aria-label="Default select example" id="Roles" aria-describedby="GenderTip"
+                                        required="required">
+
+                                        <option th:each="roleLoop: ${rolesList}" th:value="${roleLoop.id}" th:text="${roleLoop.roleName}">
+
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="Facility">Facility</label>
+                                <select th:field="*{facility.id}" class="form-control"
+                                        aria-label="Default select example" id="Facility" aria-describedby="GenderTip"
+                                        required="required">
+                                    <option th:each="facilityLoop: ${facilityList}" th:value="${facilityLoop.id}" th:text="${facilityLoop.facilityName}">
+                                   <!-- <div th:each="facilityLoop: ${facilityList}">
+                                        <option th:value="${facilityLoop.id}"> <span th:value="${facilityLoop.facilityName}"></span>  </option>
+                                    </div>-->
+                                </select>
+                            </div>
+
+
+                        </div>
+                        <!-- Role and Facility  -->
+                    <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                    <!-- <button type="submit" class="btn btn-primary">Submit</button>-->
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- --->
+
+
+    <div class="col-md-9">
+        <div class="maindiv">
+
+            <!-- users list  Starts-->
+            <div th:if="${filter == 'userList' }">
+                <div class="card">
+
+                    </div>
+                    <!--  <img class="card-img-top" src="..." alt="Card image cap">-->
+                    <div class="card-body">
+                        <h5 class="card-title userlist">User Managment </h5>
+                        <p class="card-text"></p>
+                        <div class="row">
+                            <div class="col-md-12 text-right">
+                                <button type="button" class="btn btn-success badge-pill" style="width: 80px "  data-toggle="modal" data-target="#addUser" >Add</button>
+                            </div>
+                        <!--  <a href="#" class="btn btn-primary">Go somewhere</a>-->
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <!-- <th scope="col">#</th>-->
+                                <th scope="col">First Name</th>
+                                <th scope="col">Facility</th>
+                                <th scope="col">Role</th>
+                                <th scope="col">Email Id</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Last Login Time</th>
+                                <th scope="col">Status</th>
+                                <th scope="col" style="text-align:center">ACTION</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="user: ${userList}">
+                                <!-- <th scope="row">1</th>-->
+                                <td th:text="${user.firstName}"/>
+                                <td th:text="${user.facility.facilityName}"/>
+                                <td th:text="${user.roles.roleName}"/>
+                                <td th:text="${user.email}"/>
+                                <td th:text="${user.address}"/>
+                                <td th:text="${user.lastLoginTime}"/>
+
+                                <td th:text="${user.active ? 'ACTIVE' : 'INACTIVE'}"/>
+                                <td style="text-align: center !important;"><a href="#"><i class="fas fa-edit"></i> </a>
+                                    &nbsp;<a href="#"><i style="color:red" class="fas fa-trash"></i></a></td>
+                                <!-- <td><a href="#">EDIT</a> / <a href="#">DELETE</a></td>-->
+
+
+                                <!-- <td>Yes</td>-->
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- users list  end-->
+        </div>
+    </div>
+
+
+</div>
+
+
+</html>
+

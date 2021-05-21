@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -36,12 +37,15 @@ public class UserService {
         return userRepository.findByUserName(userName);
     }
 
+    @Transactional
     public User saveUser(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setPassword(bCryptPasswordEncoder.encode("password"));
         user.setActive(true);
-        Role userRole = roleRepository.findByRoleName("ADMIN");
-        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
-        return userRepository.save(user);
+       /* Role userRole = roleRepository.findByRoleName("ADMIN");
+        user.setRoles(userRole);*/
+        userRepository.save(user);
+        System.out.printf("updated successfully");
+        return  user;
     }
 
     public User updateUser(User user) {

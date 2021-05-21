@@ -24,7 +24,7 @@ public class RoleController {
 
 
     @GetMapping(value = {"/admin/role"})
-    public ModelAndView login() {
+    public ModelAndView role() {
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("rolesDefault", new Role());
@@ -37,7 +37,7 @@ public class RoleController {
 
 
     @PostMapping("/admin/role/add")
-    public ModelAndView greetingSubmit(@ModelAttribute Role role) {
+    public ModelAndView roleadd(@ModelAttribute Role role) {
         System.out.printf("role is " + role);
         ModelAndView modelAndView = new ModelAndView();
         roleRepository.saveAndFlush(role);

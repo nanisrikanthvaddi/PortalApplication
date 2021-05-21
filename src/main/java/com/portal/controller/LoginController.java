@@ -53,6 +53,8 @@ public class LoginController {
     public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
         User userExists = userService.findUserByUserName(user.getUserName());
+
+
         if (userExists != null) {
             bindingResult
                     .rejectValue("userName", "error.user",
@@ -71,7 +73,7 @@ public class LoginController {
     }
 
     @GetMapping(value="/admin/home")
-    public ModelAndView home(@RequestParam(value = "module", required = false) String action){
+    public ModelAndView adminHome(@RequestParam(value = "module", required = false) String action){
 
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -79,10 +81,9 @@ public class LoginController {
         if(action ==null){
             user.setLastLoginTime(new Timestamp(System.currentTimeMillis()));
             userService.updateUser(user);
+            modelAndView.addObject("userDetails",user);
         }
 
-      /*  modelAndView.addObject("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
-        modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");*/
         if(action!=null && action.equals("users") ){
             modelAndView.addObject("userList", userService.getAllUsers());
             modelAndView.addObject("filter","userList");
@@ -90,6 +91,13 @@ public class LoginController {
         modelAndView.setViewName("admin/home");
         return modelAndView;
     }
+    @GetMapping(value="/admin")
+    public String adminPath(){
+
+        return "redirect:/admin/home";
+    }
+
+
 
 
 }

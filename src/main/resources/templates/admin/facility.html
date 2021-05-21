@@ -19,40 +19,52 @@
                 </button>
             </div>
             <div class="modal-body" novalidate>
-                        <form th:action="@{/admin/facility/add}" th:object="${facility}" method="POST">
-                                <div class="form-group">
-                                    <label for="FacilityName">Facility Name </label>
+                <form th:action="@{/admin/facility/add}" th:object="${facilities}" method="POST">
+                    <div class="form-group">
+                        <label for="FacilityName">Facility Name </label>
 
-                                    <select th:field="*{facilityName}" class="form-control" aria-label="Default select example" id="facilityName" aria-describedby="facilityHelp" required="required">
-                                      <!--  <option selected>Open this select menu</option>-->
-                                        <option value="Health Department">Health Department</option>
-                                        <option value="Health Care Provider">Health Care Provider</option>
-                                        <option value="Pharmaceutical Partner">Pharmaceutical Partner</option>
-                                        <option value="Lab Partner">Lab Partner</option>
-                                        <option value="Community Based Organization">Community Based Organization</option>
-                                        <option value="MDHHS Organization">MDHHS Organization</option>
-                                    </select>
+                        <select th:field="*{facilityName}" class="form-control" aria-label="Default select example" id="facilityName" aria-describedby="facilityHelp" required="required">
 
-                                    <!--<input type="text" th:field="*{facilityName}" class="form-control" id="facilityName" aria-describedby="facilityHelp" required="required"
-                                           placeholder="Enter Facility Name">-->
-                                </div>
-                            <div class="form-group">
-                                <label for="address">Facility Address </label>
-                                <input type="text" class="form-control"  th:field="*{address}"  id="address" aria-describedby="FacilityAddressHelp" required="required"
-                                       placeholder="Enter Facility Address">
-                            </div>
-                            <div class="form-group">
-                                <label for="contactNumber">Facility contact Number </label>
-                                <input type="text" class="form-control"  th:field="*{contactNumber}" id="contactNumber" aria-describedby="FacilityContactNumberHelp" required="required" pattern="[0-9]{1,20}"
-                                       placeholder="Enter Facility Contact">
-                            </div>
+                            <option value="Agriculture and Rural Development (MDARD)">Agriculture and Rural Development (MDARD)</option>
+                            <option value="Attorney General (MAG)">Attorney General (MAG)</option>
+                            <option value="Civil Rights (MDCR)">Civil Rights (MDCR)</option>
+                            <option value="Civil Service Commission (MCSC)">Civil Service Commission (MCSC)</option>
+                            <option value="Corrections (MDOC)">Corrections (MDOC)</option>
+                            <option value="Education (MDE)">Education (MDE)</option>
+                            <option value="Environment, Great Lakes, and Energy (EGLE)">Environment, Great Lakes, and Energy (EGLE)</option>
+                            <option value="Health and Human Services (MDHHS)">Health and Human Services (MDHHS)</option>
+                            <option value="Insurance and Financial Services (DIFS)">Insurance and Financial Services (DIFS)</option>
+                            <option value="Labor and Economic Opportunity (LEO)">Labor and Economic Opportunity (LEO)</option>
+                            <option value="Licensing and Regulatory Affairs (LARA)">Licensing and Regulatory Affairs (LARA)</option>
+                            <option value="Military and Veterans Affairs (DMVA)">Military and Veterans Affairs (DMVA)</option>
+                            <option value="Natural Resources (DNR)">Secretary of State (SOS)</option>
+                            <option value="State Police (MSP)">State Police (MSP)</option>
+                            <option value="Transportation (MDOT)">Transportation (MDOT)</option>
+                            <option value="Treasury">Treasury</option>
+                            <option value="External Agency">External Agency</option>
 
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                               <!-- <button type="submit" class="btn btn-primary">Submit</button>-->
-                        </form>
+                        </select>
+
+                        <!--<input type="text" th:field="*{facilityName}" class="form-control" id="facilityName" aria-describedby="facilityHelp" required="required"
+                               placeholder="Enter Facility Name">-->
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Facility Address </label>
+                        <input type="text" class="form-control"  th:field="*{address}"  id="address" aria-describedby="FacilityAddressHelp" required="required"
+                               placeholder="Enter Facility Address">
+                    </div>
+                    <div class="form-group">
+                        <label for="contactNumber">Facility contact Number </label>
+                        <input type="text" class="form-control"  th:field="*{contactNumber}" id="contactNumber" aria-describedby="FacilityContactNumberHelp" required="required" pattern="[0-9]{1,20}"
+                               placeholder="Enter Facility Contact">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                    <!-- <button type="submit" class="btn btn-primary">Submit</button>-->
+                </form>
             </div>
 
         </div>
@@ -85,7 +97,7 @@
                     <p class="card-text"></p>
                     <div class="row">
                         <div class="col-md-12 text-right">
-                        <button type="button" class="btn btn-success badge-pill" style="width: 80px "  data-toggle="modal" data-target="#addFacility" >Add</button>
+                            <button type="button" class="btn btn-success badge-pill" style="width: 80px "  data-toggle="modal" data-target="#addFacility" >Add</button>
                         </div>
                     </div>
                     <div th:if="${filter == 'facilityList' }" >

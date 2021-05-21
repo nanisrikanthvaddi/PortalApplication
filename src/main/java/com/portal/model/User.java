@@ -10,7 +10,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.sql.Timestamp;
-import java.util.Set;
 
 @Data
 @Builder
@@ -21,7 +20,8 @@ import java.util.Set;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator ="users_sequence")
+    @SequenceGenerator(name = "users_sequence" , sequenceName =  "users_sequence", initialValue = 0,allocationSize = 1)
     @Column(name = "user_id")
     private Long id;
 
@@ -40,9 +40,17 @@ public class User {
     @NotEmpty(message = "*Please provide your password")
     private String password;
 
-    @Column(name = "name")
+    @Column(name = "first_name")
     @NotEmpty(message = "*Please provide your name")
-    private String name;
+    private String firstName;
+
+    @Column(name = "last_name")
+    @NotEmpty(message = "*Please provide your name")
+    private String lastName;
+
+    @Column(name = "gender")
+    @NotEmpty(message = "*Please provide your last name")
+    private String gender;
 
     @Column(name = "address")
     @NotEmpty(message = "*Please provide your last name")
@@ -51,19 +59,26 @@ public class User {
     @Column(name = "active")
     private Boolean active;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+
 
     @Column(name = "Last_Login_time")
     private Timestamp lastLoginTime;
 
-
+/*
     @Column(name = "facility")
     @NotEmpty(message = "*Please provide your last name")
-    private String facility;
+    private String facility;*/
 
 
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "role_id", referencedColumnName = "role_id")
+
+    private  Role roles;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "facility_id", referencedColumnName = "facility_id")
+    private Facilities facility;
 
 
 }

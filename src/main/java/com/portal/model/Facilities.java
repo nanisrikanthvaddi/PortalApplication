@@ -12,8 +12,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Facility")
-public class Facility {
+@Table(name = "Facilities")
+public class Facilities {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator ="facility_sequence" )
     @SequenceGenerator(name = "facility_sequence"  ,sequenceName ="facility_sequence" ,allocationSize = 1)
