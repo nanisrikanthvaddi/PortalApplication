@@ -71,12 +71,12 @@ public class User {
 
 
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "role_id", referencedColumnName = "role_id")
 
     private  Role roles;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "facility_id", referencedColumnName = "facility_id")
     private Facilities facility;
 

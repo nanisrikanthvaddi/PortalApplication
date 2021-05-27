@@ -45,7 +45,7 @@ public class UserController {
     }
 
     @PostMapping("/admin/users/add")
-    public ModelAndView greetingSubmit(@ModelAttribute User user) {
+    public ModelAndView getUserSubmit(@ModelAttribute User user) {
 
         ModelAndView modelAndView = new ModelAndView();
         user.setLastLoginTime(new Timestamp(System.currentTimeMillis()));
@@ -53,6 +53,15 @@ public class UserController {
         user.setFacility(facilityRepository.getOne(user.getFacility().getId()));
         userService.saveUser(user);
         System.out.printf("user is "+user);
+        modelAndView.setViewName("redirect:/admin/users");
+        return modelAndView;
+    }
+
+    @PostMapping("/admin/users/delete")
+    public ModelAndView deleteUser(@ModelAttribute User user) {
+        ModelAndView modelAndView = new ModelAndView();
+        System.out.println("delete user Id is "+user.getUserName());
+        userService.deleteByUserName(user);
         modelAndView.setViewName("redirect:/admin/users");
         return modelAndView;
     }

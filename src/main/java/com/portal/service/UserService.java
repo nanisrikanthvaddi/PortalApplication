@@ -49,7 +49,6 @@ public class UserService {
     }
 
     public User updateUser(User user) {
-
         return userRepository.saveAndFlush(user);
     }
 
@@ -60,6 +59,12 @@ public class UserService {
 
 
          return userRepository.findAll();
+    }
+
+    public void deleteByUserName(User user) {
+
+        User delUser= userRepository.findByUserName(user.getUserName());
+          userRepository.deleteById(delUser.getId());
     }
 
 }

@@ -1,4 +1,4 @@
-const inputs = document.querySelectorAll(".input");
+ const inputs = document.querySelectorAll(".input");
 
 
 function addcl(){
@@ -20,6 +20,7 @@ inputs.forEach(input => {
 });
 
 
+
 $(document).ready(function () {
 
 	$("#sidebar").mCustomScrollbar({
@@ -30,9 +31,6 @@ $(document).ready(function () {
 		$('#sidebar').toggleClass('active');
 	});
 
-});
-
-$(document).ready(function () {
 
 	$("#sidebar").mCustomScrollbar({
 		theme: "minimal"
@@ -47,6 +45,20 @@ $(document).ready(function () {
 		// in our CSS
 		$('a[aria-expanded=true]').attr('aria-expanded', 'false');
 	});
+
+
+
+
+		$('.deleteUser').on('click', function (){
+
+			var data=$('#deleteModel').modal('show').val();
+
+			console(data);
+
+		});
+
+
+
 
 });
 /*
